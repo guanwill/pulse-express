@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
+
+  </head>
+  <body>
+    <h1> Welcome</h1>
+
+    <div class="container">
+    </div>
+
+<form action="/" enctype="multipart/form-data" method="post">
+  <input type="text" name="title">
+  <input type="file" name="uploads">
+  <input type="submit" value="Uploads">
+</form>
+<hr>
+
+<% for(var i = 0; i < musics.length; i++){ %>
+  <p> <%= musics[i].originalname %> </p>
+  <!-- <audio controls="controls">
+    <source src="<%= musics[i].path %>"/>
+  </audio> -->
+
+  <a href="/destroy/<%=musics[i]._id%>"> Delete </a>
+
+  <a href="/<%=musics[i]._id%>"> Show </a>
+<%}%>
+
+  </body>
+</html>
