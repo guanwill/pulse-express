@@ -4,19 +4,22 @@ mongoose = require('mongoose'),
 multer = require('multer'),
 Grid = require('gridfs'),
 Gridstream = require('gridfs-stream'),
-Music = require('../models/music'),
-uploadPath = '/uploads/';
+passport = require('passport'),
+User = require('../models/user'),
+Music = require('../models/music');
+// uploadPath = '/uploads/';
 
 router.get('/', function(request, response){
   Music.find({}, function(err, musics){
+    console.log(musics);
     if(err) console.log(err);
-    response.render('index', {'musics': musics});
+    response.render('index', {'musics': musics, user: request.user});
   });
 });
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, './public' + uploadPath);
+    cb(null, './public/uploads/'); //UPLOAD MUSIC PATH
   },
   filename: function (req, file, cb) {
     var originalname = file.originalname;
@@ -35,7 +38,7 @@ router.post('/', multer({storage: storage}).single('uploads'), function(req,res)
     mimetype: req.file.mimetype,
     destination: req.file.destination,
     filename: req.file.filename,
-    path: '.' + uploadPath + req.file.filename,//req.file.path,
+    path: './uploads/' + req.file.filename,//req.file.path,  //PATH TO PLAY MUSIC
     size: req.file.size
   })
   music.save(function(err){
@@ -44,6 +47,13 @@ router.post('/', multer({storage: storage}).single('uploads'), function(req,res)
       res.redirect('/');
     }
   })
+});
+
+//LOG OUT OF PASSPORT-GITHUB
+router.get('/logout', function(req, res){
+  console.log('logging out');
+  req.logout();
+  res.redirect('/');
 });
 
 // SHOW
@@ -62,6 +72,18 @@ router.get('/destroy/:id', function(request, response){
     })
   })
 })
+
+
+
+//PASSPORT-GITHUB
+require("../config/passport")(passport)
+router.get('/auth/github', passport.authenticate('github', {scope: 'email'}));
+
+router.get('/auth/github/callback',
+  passport.authenticate('github', { failureRedirect: '/' }), function(req, res) {
+    res.redirect('/');
+  }
+);
 
 
 

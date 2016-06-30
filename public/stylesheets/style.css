@@ -1,6 +1,7 @@
 html, body {
   padding: 0;
   margin: 0;
+  background: lightblue;
 }
 div#mp3_player > div > audio {
   background: black;

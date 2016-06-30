@@ -1,11 +1,16 @@
 var express = require('express'),
-router = express.Router();
+router = express.Router(),
+Music = require('../models/music');
 
 
 
-//Shows lists -> GET '/lists'
-router.get('/', function(req, res){
-  res.send(req.files);
+
+//Shows lists -> GET '/api'
+router.get('/', function(request, response){
+  Music.find({}, function(err, musics){
+    if(err) console.log(err);
+    response.send(request.body);
+  });
 });
 
 //Render a new post form -> GET '/lists/new'
@@ -20,7 +25,7 @@ router.get('/:id', function(req, res){
 
 //Create a new post -> POST '/lists'
 router.post('/', function(req, res){
-  res.send('POST');
+  res.send('post');
 });
 
 //Render the edit post form -> GET '/lists/:id/edit'
