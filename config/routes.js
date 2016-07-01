@@ -44,7 +44,7 @@ router.post('/', multer({storage: storage}).single('uploads'), function(req,res)
   music.save(function(err){
     if (err){console.log(err)}
     else {
-      res.redirect('/');
+      res.redirect('https://guanwill.github.io/pulse-express-ajax/index.html');
     }
   })
 });

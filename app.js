@@ -22,13 +22,17 @@ app.use(express.static(__dirname + '/public'));
 app.use(expressSession({secret: 'mySecretKey'}));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(cors());
+var corsOptions = {
+    origin: "*",
+    allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'x-reset-token', 'x-invite-token', 'x-api-key', 'x-www-form-urlencoded'],
+    credentials: true
+};
+app.use(cors(corsOptions));
+
 app.use('/api', apiRouter);
 app.use('/', router);
 
-
 mongoose.connect('mongodb://localhost/pulse-express2');
-
 
 require("./config/passport")(passport)
 
