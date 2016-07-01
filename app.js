@@ -8,6 +8,7 @@ Gridstream = require('gridfs-stream'),
 mongoose = require('mongoose'),
 passport = require('passport'),
 expressSession = require('express-session'),
+cors = require('cors'),
 router = require('./config/routes'),
 apiRouter = require('./config/apiRouter'),
 User = require('./models/user'),
@@ -21,9 +22,10 @@ app.use(express.static(__dirname + '/public'));
 app.use(expressSession({secret: 'mySecretKey'}));
 app.use(passport.initialize());
 app.use(passport.session());
-
-app.use('/', router);
+app.use(cors());
 app.use('/api', apiRouter);
+app.use('/', router);
+
 
 mongoose.connect('mongodb://localhost/pulse-express2');
 
