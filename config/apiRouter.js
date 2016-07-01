@@ -47,7 +47,7 @@ router.delete('/:id', function(request, response){
   Music.findById(request.params.id, function(err, music) {
     if(err) console.log(err);
     music.remove(function(err, music){
-      response.redirect('/');
+      response.send('Successfully deleted');
     })
   })
 })
