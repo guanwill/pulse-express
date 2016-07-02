@@ -65,9 +65,7 @@ var storage = multer.diskStorage({
   }
 });
 
-
 router.post('/', multer({storage: storage}).single('uploads'), function(req,res){
-  console.log(req.body);
   var music = new Music ({
     fieldname: req.file.fieldname,
     originalname: req.file.originalname,
@@ -81,7 +79,7 @@ router.post('/', multer({storage: storage}).single('uploads'), function(req,res)
   music.save(function(err){
     if (err){console.log(err)}
     else {
-      res.redirect('/');
+      res.send('Successfully created');
     }
   })
 });
