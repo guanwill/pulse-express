@@ -6,8 +6,8 @@ multer = require('multer'),
 Grid = require('gridfs'),
 Gridstream = require('gridfs-stream'),
 mongoose = require('mongoose'),
-passport = require('passport'),
-expressSession = require('express-session'),
+// passport = require('passport'),
+// expressSession = require('express-session'),
 cors = require('cors'),
 router = require('./config/routes'),
 apiRouter = require('./config/apiRouter'),
@@ -35,7 +35,7 @@ app.use('/', router);
 mongoose.connect('mongodb://serenewindcave:serenewindcave@ds011775.mlab.com:11775/heroku_hhjlwrb5');
 
 
-require("./config/passport")(passport)
+// require("./config/passport")(passport)
 
 
 app.listen(port, function(){
