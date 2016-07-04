@@ -4,7 +4,7 @@ mongoose = require('mongoose'),
 multer = require('multer'),
 Grid = require('gridfs'),
 Gridstream = require('gridfs-stream'),
-passport = require('passport'),
+// passport = require('passport'),
 User = require('../models/user'),
 Music = require('../models/music');
 // uploadPath = '/uploads/';
@@ -51,11 +51,11 @@ router.post('/', multer({storage: storage}).single('uploads'), function(req,res)
 });
 
 //LOG OUT OF PASSPORT-GITHUB
-router.get('/logout', function(req, res){
-  console.log('logging out');
-  req.logout();
-  res.redirect('/');
-});
+// router.get('/logout', function(req, res){
+//   console.log('logging out');
+//   req.logout();
+//   res.redirect('/');
+// });
 
 // SHOW
 router.get('/:id', function(request, response){
@@ -75,14 +75,14 @@ router.get('/destroy/:id', function(request, response){
 })
 
 //PASSPORT-GITHUB
-require("../config/passport")(passport)
-router.get('/auth/github', passport.authenticate('github', {scope: 'email'}));
-
-router.get('/auth/github/callback',
-  passport.authenticate('github', { failureRedirect: '/' }), function(req, res) {
-    res.redirect('/');
-  }
-);
+// require("../config/passport")(passport)
+// router.get('/auth/github', passport.authenticate('github', {scope: 'email'}));
+//
+// router.get('/auth/github/callback',
+//   passport.authenticate('github', { failureRedirect: '/' }), function(req, res) {
+//     res.redirect('/');
+//   }
+// );
 
 
 
