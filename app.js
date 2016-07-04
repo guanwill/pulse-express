@@ -32,7 +32,8 @@ app.use(cors(corsOptions));
 app.use('/api', apiRouter);
 app.use('/', router);
 
-mongoose.connect('mongodb://localhost/pulse-express2');
+mongoose.connect('mongodb://serenewindcave:serenewindcave@ds011775.mlab.com:11775/heroku_hhjlwrb5');
+
 
 require("./config/passport")(passport)
 
