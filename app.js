@@ -19,7 +19,7 @@ app.set('view engine', 'ejs')
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/public'));
-app.use(expressSession({secret: 'mySecretKey'}));
+// app.use(expressSession({secret: 'mySecretKey'}));
 app.use(passport.initialize());
 app.use(passport.session());
 var corsOptions = {
