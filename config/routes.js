@@ -74,8 +74,6 @@ router.get('/destroy/:id', function(request, response){
   })
 })
 
-
-
 //PASSPORT-GITHUB
 require("../config/passport")(passport)
 router.get('/auth/github', passport.authenticate('github', {scope: 'email'}));
