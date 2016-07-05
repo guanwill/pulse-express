@@ -17,7 +17,7 @@ router.get('/', function(request, response){
   });
 });
 
-//Show a specific post -> GET '/lists/:id'
+//Show a specific music
 router.get('/:id', function(request, response){
   Music.findById(request.params.id, function(err, musics) {
     if(err) console.log(err);
@@ -28,18 +28,18 @@ router.get('/:id', function(request, response){
 router.get('/:id/media', function(request, response){
   Music.findById(request.params.id, function(err, music) {
     if(err) console.log(err);
-    var filePath = path.join(__dirname, '..', 'public', music.path);
+    var filePath = path.join(__dirname, '..', 'public', music.path);  //locates the path of the music file
     var stat = fileSystem.statSync(filePath);
-    console.log(stat);
+    console.log(stat);  //gives the file some headers so we know what file it is
     response.writeHead(200, {
         'Content-Type': 'audio/mpeg',
         'Content-Length': stat.size,
         'Access-Control-Allow-Origin' : '*'
     });
     // response.json(musics);
-    var readStream = fileSystem.createReadStream(filePath);
+    var readStream = fileSystem.createReadStream(filePath); //pulls the binary from music file from directory and breaks it into little parts
     // We replaced all the event handlers with a simple call to readStream.pipe()
-    readStream.pipe(response);
+    readStream.pipe(response); //sends all the little binary data to front end in little chunks and then spits out a whole file to the front end
   })
 })
 
